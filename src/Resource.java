@@ -1,6 +1,12 @@
 import java.util.Date;
 
 public class Resource {
+	private static int inAllocationProccess = 0;
+	private static int inProgressCount = 0;
+	private static int allocatedCount = 0;
+	private static int finishedCount = 0;
+	private static int allocationsTotal = 0;
+	
 	private int id;
 	private String status;
 	private Activity activity;
@@ -9,6 +15,8 @@ public class Resource {
 	private Date finishAllocation;
 	
 	public void allocate(AbleToAskResource responsible, Date startAllocation, Date finishAllocation) {
+		setAllocationsTotal(getAllocationsTotal() + 1);
+		setInAllocationProccess(getInAllocationProccess() + 1);
 		this.setStatus("Em processo de alocação");
 		
 		AbleToAskResource newResponsible;
@@ -27,6 +35,8 @@ public class Resource {
 		newFinishAllocation = new Date();
 		this.setFinishAllocation(newFinishAllocation);		
 		
+		setInAllocationProccess(getInAllocationProccess() - 1);
+		setAllocatedCount(getAllocatedCount() + 1);
 		this.setStatus("Alocado");
 	}
 	
@@ -76,6 +86,46 @@ public class Resource {
 
 	public void setFinishAllocation(Date finishAllocation) {
 		this.finishAllocation = finishAllocation;
+	}
+
+	public static int getInProgressCount() {
+		return inProgressCount;
+	}
+
+	public static void setInProgressCount(int inProgressCount) {
+		Resource.inProgressCount = inProgressCount;
+	}
+
+	public static int getInAllocationProccess() {
+		return inAllocationProccess;
+	}
+
+	public static void setInAllocationProccess(int inAllocationProccess) {
+		Resource.inAllocationProccess = inAllocationProccess;
+	}
+
+	public static int getAllocatedCount() {
+		return allocatedCount;
+	}
+
+	public static void setAllocatedCount(int allocatedCount) {
+		Resource.allocatedCount = allocatedCount;
+	}
+
+	public static int getFinishedCount() {
+		return finishedCount;
+	}
+
+	public static void setFinishedCount(int finishedCount) {
+		Resource.finishedCount = finishedCount;
+	}
+
+	public static int getAllocationsTotal() {
+		return allocationsTotal;
+	}
+
+	public static void setAllocationsTotal(int allocationsTotal) {
+		Resource.allocationsTotal = allocationsTotal;
 	}
 	
 }

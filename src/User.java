@@ -1,5 +1,11 @@
 
 public class User {
+	private static int count = 0;
+	
+	public User (){
+		setCount(getCount() + 1);
+	}
+	
 	private int id;
 	private String name;
 
@@ -17,6 +23,14 @@ public class User {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public static int getCount() {
+		return count;
+	}
+
+	public static void setCount(int count) {
+		User.count = count;
 	}
 	
 }
