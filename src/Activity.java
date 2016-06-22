@@ -14,11 +14,11 @@ public class Activity {
 	}
 	public void setType(String type) {
 		if (type.equals("aula tradicional"))
-			setTraditionalClassesCount(getTraditionalClassesCount() + 1);
+			increaseTraditionalClassesCount();
 		else if (type.equals("apresentações"))
-			setPresentationsCount(getPresentationsCount() + 1);
+			increasePresentationsCount();
 		else if (type.equals("laboratório"))
-			setLaboratoriesCount(getLaboratoriesCount() + 1);
+			increaseLaboratoriesCount();
 		else {
 			System.out.println("Tipo de atividade inválido.");
 			return;
@@ -51,22 +51,40 @@ public class Activity {
 	public void setSupportMaterial(ArrayList<File> supportMaterial) {
 		this.supportMaterial = supportMaterial;
 	}
+	public static void increaseTraditionalClassesCount() {
+		traditionalClassesCount += 1;
+	}
+	public static void decreaseTraditionalClassesCount() {
+		if (traditionalClassesCount > 0)
+			traditionalClassesCount -= 1;
+		else
+			System.out.println("Não há atividades do tipo aula tradicional para remover.");
+	}
 	public static int getTraditionalClassesCount() {
 		return traditionalClassesCount;
 	}
-	public static void setTraditionalClassesCount(int traditionalClassesCount) {
-		Activity.traditionalClassesCount = traditionalClassesCount;
+	public static void increasePresentationsCount() {
+		presentationsCount += 1;
+	}
+	public static void decreasePresentationsCount() {
+		if (presentationsCount > 0)
+			presentationsCount -= 1;
+		else
+			System.out.println("Não há atividades do tipo apresentações para remover.");
 	}
 	public static int getPresentationsCount() {
 		return presentationsCount;
 	}
-	public static void setPresentationsCount(int presentationsCount) {
-		Activity.presentationsCount = presentationsCount;
+	public static void increaseLaboratoriesCount() {
+		laboratoriesCount += 1;
+	}
+	public static void decreaseLaboratoriesCount() {
+		if (laboratoriesCount > 0)
+			laboratoriesCount -= 1;
+		else
+			System.out.println("Não há atividades do tipo laboratório para remover.");
 	}
 	public static int getLaboratoriesCount() {
 		return laboratoriesCount;
-	}
-	public static void setLaboratoriesCount(int laboratoriesCount) {
-		Activity.laboratoriesCount = laboratoriesCount;
 	}
 }

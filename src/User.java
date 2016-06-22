@@ -3,7 +3,7 @@ public class User {
 	private static int count = 0;
 	
 	public User (){
-		setCount(getCount() + 1);
+		increaseCount();
 	}
 	
 	private int id;
@@ -29,8 +29,15 @@ public class User {
 		return count;
 	}
 
-	public static void setCount(int count) {
-		User.count = count;
+	public static void increaseCount() {
+		count += 1;
+	}
+	
+	public static void decreaseCount() {
+		if (count > 0)
+			count -= 1;
+		else
+			System.out.println("Não há usuários para remover.");
 	}
 	
 }
