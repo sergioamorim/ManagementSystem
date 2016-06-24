@@ -2,9 +2,9 @@ import java.io.File;
 import java.util.ArrayList;
 
 public class Activity {
-	private static int traditionalClassesCount = 0;
-	private static int presentationsCount = 0;
-	private static int laboratoriesCount = 0;
+	public static Counter traditionalClassesCount = new Counter("aula tradicional");
+	public static Counter presentationsCount = new Counter("apresentações");
+	public static Counter laboratoriesCount = new Counter("laboratório");
 	
 	String title;
 	String description;
@@ -14,11 +14,11 @@ public class Activity {
 	}
 	public void setType(String type) {
 		if (type.equals("aula tradicional"))
-			increaseTraditionalClassesCount();
+			Activity.traditionalClassesCount.increase();
 		else if (type.equals("apresentações"))
-			increasePresentationsCount();
+			Activity.presentationsCount.increase();
 		else if (type.equals("laboratório"))
-			increaseLaboratoriesCount();
+			Activity.laboratoriesCount.increase();
 		else {
 			System.out.println("Tipo de atividade inválido.");
 			return;
@@ -51,40 +51,5 @@ public class Activity {
 	public void setSupportMaterial(ArrayList<File> supportMaterial) {
 		this.supportMaterial = supportMaterial;
 	}
-	public static void increaseTraditionalClassesCount() {
-		traditionalClassesCount += 1;
-	}
-	public static void decreaseTraditionalClassesCount() {
-		if (traditionalClassesCount > 0)
-			traditionalClassesCount -= 1;
-		else
-			System.out.println("Não há atividades do tipo aula tradicional para remover.");
-	}
-	public static int getTraditionalClassesCount() {
-		return traditionalClassesCount;
-	}
-	public static void increasePresentationsCount() {
-		presentationsCount += 1;
-	}
-	public static void decreasePresentationsCount() {
-		if (presentationsCount > 0)
-			presentationsCount -= 1;
-		else
-			System.out.println("Não há atividades do tipo apresentações para remover.");
-	}
-	public static int getPresentationsCount() {
-		return presentationsCount;
-	}
-	public static void increaseLaboratoriesCount() {
-		laboratoriesCount += 1;
-	}
-	public static void decreaseLaboratoriesCount() {
-		if (laboratoriesCount > 0)
-			laboratoriesCount -= 1;
-		else
-			System.out.println("Não há atividades do tipo laboratório para remover.");
-	}
-	public static int getLaboratoriesCount() {
-		return laboratoriesCount;
-	}
+	
 }

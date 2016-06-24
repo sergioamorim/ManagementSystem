@@ -1,9 +1,9 @@
 
 public class User {
-	private static int count = 0;
+	public static Counter count = new Counter("usuários");
 	
 	public User (){
-		increaseCount();
+		User.count.increase();
 	}
 	
 	private int id;
@@ -23,21 +23,6 @@ public class User {
 
 	public void setName(String name) {
 		this.name = name;
-	}
-
-	public static int getCount() {
-		return count;
-	}
-
-	public static void increaseCount() {
-		count += 1;
-	}
-	
-	public static void decreaseCount() {
-		if (count > 0)
-			count -= 1;
-		else
-			System.out.println("Não há usuários para remover.");
 	}
 	
 }
