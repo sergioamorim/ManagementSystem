@@ -2,7 +2,7 @@ import java.util.Scanner;
 
 public class Main {
 
-	public static void main() {
+	public static void main(String args[]) {
 		int choice = 9;
 		Scanner kb = new Scanner(System.in);
 		
