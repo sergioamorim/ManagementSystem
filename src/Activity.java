@@ -2,9 +2,9 @@ import java.io.File;
 import java.util.ArrayList;
 
 public class Activity {
-	public static Counter traditionalClassesCount = new Counter("aula tradicional");
-	public static Counter presentationsCount = new Counter("apresentações");
-	public static Counter laboratoriesCount = new Counter("laboratório");
+	public static Counter traditionalClassesCount = new Counter("atividades de aula tradicional");
+	public static Counter presentationsCount = new Counter("atividades de apresentações");
+	public static Counter laboratoriesCount = new Counter("atividades de laboratório");
 	
 	String title;
 	String description;

@@ -14,7 +14,14 @@ public class Counter {
 	}
 	
 	public void decrease(){
-		this.counter -= 1;
+		if (this.counter < 1) {
+			System.out.print("ERRO! O contador de ");
+			System.out.print(this.name);
+			System.out.println(" está zerado e houve uma requisição para decrementá-lo!");
+		}
+		else {
+			this.counter -= 1;
+		}
 	}
 	
 	public int getCount(){

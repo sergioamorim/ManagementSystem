@@ -1,11 +1,11 @@
 import java.util.Date;
 
 public class Resource {
-	private static int inAllocationProccess = 0;
-	private static int inProgressCount = 0;
-	private static int allocatedCount = 0;
-	private static int finishedCount = 0;
-	private static int allocationsTotal = 0;
+	public static Counter inAllocationProccess = new Counter("recursos em processo de alocação");
+	public static Counter inProgressCount = new Counter("recursos com alocação em andamento");
+	public static Counter allocatedCount = new Counter("recursos alocados");
+	public static Counter finishedCount = new Counter("alocações concluídas");
+	public static Counter allocationsTotal = new Counter("alocações no total");
 	
 	private int id;
 	private String status;
@@ -15,8 +15,8 @@ public class Resource {
 	private Date finishAllocation;
 	
 	public void allocate(AbleToAskResource responsible, Date startAllocation, Date finishAllocation) {
-		increaseAllocationsTotal();
-		increaseInAllocationProccess();
+		Resource.allocationsTotal.increase();
+		Resource.inAllocationProccess.increase();
 		this.setStatus("Em processo de alocação");
 		
 		AbleToAskResource newResponsible;
@@ -35,8 +35,8 @@ public class Resource {
 		newFinishAllocation = new Date();
 		this.setFinishAllocation(newFinishAllocation);		
 		
-		decreaseInAllocationProccess();
-		increaseAllocatedCount();
+		Resource.inAllocationProccess.decrease();
+		Resource.allocatedCount.increase();
 		this.setStatus("Alocado");
 	}
 	
@@ -80,55 +80,5 @@ public class Resource {
 	}
 	public void setFinishAllocation(Date finishAllocation) {
 		this.finishAllocation = finishAllocation;
-	}
-
-	public static int getInProgressCount() {
-		return inProgressCount;
-	}
-	public static void increaseInProgressCount() {
-		inProgressCount += 1;
-	}
-	public static void decreaseInProgressCount() {
-		inProgressCount -= 1;
-	}
-
-	public static int getInAllocationProccess() {
-		return inAllocationProccess;
-	}
-	public static void increaseInAllocationProccess() {
-		inAllocationProccess += 1;
-	}
-	public static void decreaseInAllocationProccess() {
-		inAllocationProccess -= 1;
-	}
-
-	public static int getAllocatedCount() {
-		return allocatedCount;
-	}
-	public static void increaseAllocatedCount() {
-		allocatedCount += 1;
-	}	
-	public static void decreaseAllocatedCount() {
-		allocatedCount -= 1;
-	}
-
-	public static int getFinishedCount() {
-		return finishedCount;
-	}
-	public static void increaseFinishedCount() {
-		finishedCount += 1;
-	}
-		public static void decreaseFinishedCount() {
-		finishedCount -= 1;
-	}
-
-	public static int getAllocationsTotal() {
-		return allocationsTotal;
-	}
-	public static void increaseAllocationsTotal() {
-		allocationsTotal += 1;
-	}
-		public static void decreaseAllocationsTotal() {
-		allocationsTotal -= 1;
 	}
 }

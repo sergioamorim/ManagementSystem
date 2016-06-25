@@ -5,8 +5,8 @@ public class Administrator extends AbleToAskResource {
 			resource.getResponsible().saveResourceInHistory(resource);
 			resource.getResponsible().saveActivityResourceInHistory(resource.getActivity());
 			resource.getResponsible().setAllocationInProgress(false);
-			Resource.decreaseInProgressCount();
-			Resource.increaseFinishedCount();
+			Resource.inProgressCount.decrease();
+			Resource.finishedCount.increase();
 			resource.setStatus("Concluído");
 		}
 		else

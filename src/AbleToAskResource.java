@@ -6,8 +6,8 @@ public class AbleToAskResource extends User {
 	private ArrayList<Activity> activititesHistory;
 		
 	public void confirmAllocation(Resource resource) {
-		Resource.decreaseAllocatedCount();
-		Resource.increaseInProgressCount();
+		Resource.allocatedCount.decrease();
+		Resource.inProgressCount.increase();
 		this.setAllocationInProgress(true);
 		resource.setStatus("Em andamento");
 	}
