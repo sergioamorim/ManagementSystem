@@ -1,9 +1,9 @@
 
 public class User {
-	public static Counter count = new Counter("usuários");
+	public static Counter counter = new Counter("usuários");
 	
 	public User (){
-		User.count.increase();
+		User.counter.increase();
 	}
 	
 	private int id;

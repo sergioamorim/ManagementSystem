@@ -2,9 +2,9 @@ import java.io.File;
 import java.util.ArrayList;
 
 public class Activity {
-	public static Counter traditionalClassesCount = new Counter("atividades de aula tradicional");
-	public static Counter presentationsCount = new Counter("atividades de apresentações");
-	public static Counter laboratoriesCount = new Counter("atividades de laboratório");
+	public static Counter traditionalClassesCounter = new Counter("atividades de aula tradicional");
+	public static Counter presentationsCounter = new Counter("atividades de apresentações");
+	public static Counter laboratoriesCounter = new Counter("atividades de laboratório");
 	
 	String title;
 	String description;
@@ -14,11 +14,11 @@ public class Activity {
 	}
 	public void setType(String type) {
 		if (type.equals("aula tradicional"))
-			Activity.traditionalClassesCount.increase();
+			Activity.traditionalClassesCounter.increase();
 		else if (type.equals("apresentações"))
-			Activity.presentationsCount.increase();
+			Activity.presentationsCounter.increase();
 		else if (type.equals("laboratório"))
-			Activity.laboratoriesCount.increase();
+			Activity.laboratoriesCounter.increase();
 		else {
 			System.out.println("Tipo de atividade inválido.");
 			return;

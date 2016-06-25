@@ -1,11 +1,11 @@
 import java.util.Date;
 
 public class Resource {
-	public static Counter inAllocationProccess = new Counter("recursos em processo de alocação");
-	public static Counter inProgressCount = new Counter("recursos com alocação em andamento");
-	public static Counter allocatedCount = new Counter("recursos alocados");
-	public static Counter finishedCount = new Counter("alocações concluídas");
-	public static Counter allocationsTotal = new Counter("alocações no total");
+	public static Counter inAllocationProccessCounter = new Counter("recursos em processo de alocação");
+	public static Counter inProgressCounter = new Counter("recursos com alocação em andamento");
+	public static Counter allocatedCounter = new Counter("recursos alocados");
+	public static Counter finishedCounter = new Counter("alocações concluídas");
+	public static Counter allocationsTotalCounter = new Counter("alocações no total");
 	
 	private int id;
 	private String status;
@@ -15,8 +15,8 @@ public class Resource {
 	private Date finishAllocation;
 	
 	public void allocate(AbleToAskResource responsible, Date startAllocation, Date finishAllocation) {
-		Resource.allocationsTotal.increase();
-		Resource.inAllocationProccess.increase();
+		Resource.allocationsTotalCounter.increase();
+		Resource.inAllocationProccessCounter.increase();
 		this.setStatus("Em processo de alocação");
 		
 		AbleToAskResource newResponsible;
@@ -35,8 +35,8 @@ public class Resource {
 		newFinishAllocation = new Date();
 		this.setFinishAllocation(newFinishAllocation);		
 		
-		Resource.inAllocationProccess.decrease();
-		Resource.allocatedCount.increase();
+		Resource.inAllocationProccessCounter.decrease();
+		Resource.allocatedCounter.increase();
 		this.setStatus("Alocado");
 	}
 	
