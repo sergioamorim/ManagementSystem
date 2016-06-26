@@ -1,4 +1,5 @@
 import java.util.Date;
+import java.util.ArrayList;
 
 public class Resource {
 	public static Counter inAllocationProccessCounter = new Counter("recursos em processo de alocação");
@@ -6,6 +7,7 @@ public class Resource {
 	public static Counter allocatedCounter = new Counter("recursos alocados");
 	public static Counter finishedCounter = new Counter("alocações concluídas");
 	public static Counter allocationsTotalCounter = new Counter("alocações no total");
+	private static ArrayList<Resource> Resources;
 	
 	private int id;
 	private String status;
@@ -13,6 +15,20 @@ public class Resource {
 	private AbleToAskResource responsible;
 	private Date startAllocation;
 	private Date finishAllocation;
+	
+	public Resource() {
+		Resource.Resources.add(this);
+	}
+	
+	public Resource findById(int id) {
+		for (Resource resource : Resource.Resources) {
+			if (resource.getId() == id) {
+				return resource;
+			}
+		}
+		System.out.println("Recurso não encontrado.");
+		return null;
+	}
 	
 	public void allocate(AbleToAskResource responsible, Date startAllocation, Date finishAllocation) {
 		Resource.allocationsTotalCounter.increase();
