@@ -12,15 +12,66 @@ public class Main {
 			}
 			else if (choice == 2) { /* menu for professors and researchers */
 				Main.printProfessorsResearchersMenu();
+				try {
+					choice = kb.nextInt();
+				} 
+				catch (java.util.InputMismatchException e){
+					System.out.println("ERRO! Insira um número inteiro.");
+					choice = 10;
+				}	
+				while (choice != 0 && choice != 9) {
+					if (choice == 1) { /* confirm an allocation */
+						
+					}
+					else { /* invalid input */
+						System.out.println("Entrada inválida");
+					}
+					Main.printProfessorsResearchersMenu();
+					try {
+						choice = kb.nextInt();
+					} 
+					catch (java.util.InputMismatchException e){
+						System.out.println("ERRO! Insira um número inteiro.");
+						choice = 10;
+					}	
+				}
 			}
 			else if (choice == 3) { /* menu for administrators*/
 				Main.printAdministratorMenu();
-				choice = kb.nextInt();
+				try {
+					choice = kb.nextInt();
+				} 
+				catch (java.util.InputMismatchException e){
+					System.out.println("ERRO! Insira um número inteiro.");
+					choice = 10;
+				}	
 				while (choice != 0 && choice != 9) {
 					if (choice == 1) { /* create a resource allocation */
+						System.out.println("Insira o ID do recurso a ser alocado: ");
+						int resourceId = 0;
+						Resource resource = null;
+						try {
+							resourceId = kb.nextInt();
+						}
+						catch (java.util.InputMismatchException e) {
+							resourceId = -1;
+						}
+						if (resourceId < 0) {
+							System.out.println("ERRO! ID inválido. Insira um número natural.");
+							choice = 1;
+						}
+						else {
+							resource = Resource.findById(resourceId);
+							if (resource == null) {
+								choice = 1;
+							}
+							else {
+								
+							}
+						}
 						
 					}
-					else if (choice == 2) { /* edit a resource allocation */
+					else if (choice == 2) { /* modify a resource allocation */
 						
 					}
 					else if (choice == 3) { /* delete a resource allocation */
@@ -29,17 +80,51 @@ public class Main {
 					else if (choice == 4) { /* print activities report */
 						Main.printActivitiesReport();
 					}
+					else { /* invalid input */
+						System.out.println("Entrada inválida");
+					}
 					Main.printAdministratorMenu();
-					choice = kb.nextInt();
+					try {
+						choice = kb.nextInt();
+					} 
+					catch (java.util.InputMismatchException e){
+						System.out.println("ERRO! Insira um número inteiro.");
+						choice = 10;
+					}	
 				}
 			}
 			else if (choice == 1){ /* menu for students */
 				Main.printStudentMenu();
+				try {
+					choice = kb.nextInt();
+				} 
+				catch (java.util.InputMismatchException e){
+					System.out.println("ERRO! Insira um número inteiro.");
+					choice = 10;
+				}	
+				while (choice != 0 && choice != 9) {
+					/* there is no valid option for students yet */
+					System.out.println("Entrada inválida"); /* invalid input */
+					Main.printStudentMenu();
+					try {
+						choice = kb.nextInt();
+					} 
+					catch (java.util.InputMismatchException e){
+						System.out.println("ERRO! Insira um número inteiro.");
+						choice = 10;
+					}	
+				}
 			}
 			else { /* invalid input */
 				System.out.println("Entrada inválida");
 			}
-			choice = kb.nextInt();
+			try {
+				choice = kb.nextInt();
+			} 
+			catch (java.util.InputMismatchException e){
+				System.out.println("ERRO! Insira um número inteiro.");
+				choice = 10;
+			}	
 		}
 		kb.close();
 	}
