@@ -8,6 +8,13 @@ public class Counter {
 		this.name = name;
 		this.counter = 0;
 	}
+	
+	public void printCount(){
+		System.out.print("Quantidade de ");
+		System.out.print(this.name);
+		System.out.print(": ");
+		System.out.println(this.counter);
+	}
 
 	public void increase(){
 		this.counter += 1;
@@ -30,6 +37,9 @@ public class Counter {
 	
 	public String getName(){
 		return this.name;
+	}
+	public void setName(String name){
+		this.name = name;
 	}
 
 }

@@ -1,8 +1,4 @@
 import java.util.Scanner;
-import Activity;
-import Resource;
-import User;
-
 
 public class Main {
 
@@ -48,15 +44,15 @@ public class Main {
 		kb.close();
 	}
 	private static void printActivitiesReport(){
-		System.out.print(Activity.laboratoriesCounter.getCount());
-		System.out.print(Activity.presentationsCounter.getCount());
-		System.out.print(Activity.traditionalClassesCounter.getCount());
-		System.out.print(Resource.allocatedCounter.getCount());
-		System.out.print(Resource.allocationsTotalCounter.getCount());
-		System.out.print(Resource.finishedCounter.getCount());
-		System.out.print(Resource.inAllocationProccessCounter.getCount());
-		System.out.print(Resource.inProgressCounter.getCount());
-		System.out.print(User.counter.getCount());
+		Activity.laboratoriesCounter.printCount();
+		Activity.presentationsCounter.printCount();
+		Activity.traditionalClassesCounter.printCount();
+		Resource.allocatedCounter.printCount();
+		Resource.allocationsTotalCounter.printCount();
+		Resource.finishedCounter.printCount();
+		Resource.inAllocationProccessCounter.printCount();
+		Resource.inProgressCounter.printCount();
+		User.counter.printCount();
 	}
 	private static void printMainMenu(){
 		System.out.println("Insira 0 para sair");
