@@ -20,7 +20,7 @@ public class Resource {
 		Resource.Resources.add(this);
 	}
 	
-	public Resource findById(int id) {
+	public static Resource findById(int id) {
 		for (Resource resource : Resource.Resources) {
 			if (resource.getId() == id) {
 				return resource;
