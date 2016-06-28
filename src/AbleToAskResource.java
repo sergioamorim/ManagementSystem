@@ -1,15 +1,31 @@
 import java.util.ArrayList;
 
 public class AbleToAskResource extends User {
+	private static ArrayList<AbleToAskResource> ableToAskResourceList = new ArrayList<AbleToAskResource>();	
 	private boolean allocationInProgress;
-	private ArrayList<Resource> resourcesHistory;
-	private ArrayList<Activity> activititesHistory;
+	private ArrayList<Allocation> allocationsHistory = new ArrayList<Allocation>();
+	private ArrayList<Activity> activititesHistory = new ArrayList<Activity>();
+	
+	public AbleToAskResource() {
+		AbleToAskResource.ableToAskResourceList.add(this);
+	}
+	
+	public static AbleToAskResource findById(int id) {
+		for (AbleToAskResource ableToAskResource : AbleToAskResource.ableToAskResourceList) {
+			if (ableToAskResource.getId() == id) {
+				return ableToAskResource;
+			}
+		}
+		System.out.println("Recurso não encontrado.");
+		return null;
+	}
 		
-	public void confirmAllocation(Resource resource) {
-		Resource.allocatedCounter.decrease();
-		Resource.inProgressCounter.increase();
+	public void confirmAllocation(Allocation allocation) {
+		
+		Allocation.allocatedCounter.decrease();
+		Allocation.inProgressCounter.increase();
 		this.setAllocationInProgress(true);
-		resource.setStatus("Em andamento");
+		allocation.setStatus("Em andamento");
 	}
 	public boolean isAllocationInProgress() {
 		return allocationInProgress;
@@ -17,11 +33,11 @@ public class AbleToAskResource extends User {
 	public void setAllocationInProgress(boolean allocationInProgress) {
 		this.allocationInProgress = allocationInProgress;
 	}
-	public ArrayList<Resource> getResourcesHistory() {
-		return resourcesHistory;
+	public ArrayList<Allocation> getAllocationsHistory() {
+		return allocationsHistory;
 	}
-	public void setResourcesHistory(ArrayList<Resource> resourcesHistory) {
-		this.resourcesHistory = resourcesHistory;
+	public void setAllocationsHistory(ArrayList<Allocation> resourcesHistory) {
+		this.allocationsHistory = resourcesHistory;
 	}
 	public ArrayList<Activity> getActivititesHistory() {
 		return activititesHistory;
@@ -29,11 +45,11 @@ public class AbleToAskResource extends User {
 	public void setActivititesHistory(ArrayList<Activity> activititesHistory) {
 		this.activititesHistory = activititesHistory;
 	}
-	public void saveResourceInHistory(Resource resource) {
-		ArrayList<Resource> newResourcesHistory;
-		newResourcesHistory = this.getResourcesHistory();
-		newResourcesHistory.add(resource);
-		this.setResourcesHistory(newResourcesHistory);
+	public void saveResourceInHistory(Allocation allocation) {
+		ArrayList<Allocation> newAllocationsHistory;
+		newAllocationsHistory = this.getAllocationsHistory();
+		newAllocationsHistory.add(allocation);
+		this.setAllocationsHistory(newAllocationsHistory);
 	}
 	public void saveActivityResourceInHistory(Activity activity) {
 		ArrayList<Activity> newActivitiesHistory;

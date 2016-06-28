@@ -1,10 +1,14 @@
 import java.util.Scanner;
+import java.time.LocalDateTime;
 
 public class Main {
 
-	public static void main(String args[]) {
+	public static void main(String args[]){
 		int choice = 9;
 		Scanner kb = new Scanner(System.in);
+		
+		Resource ex = new Resource();
+		ex.setId(1);
 		
 		while (choice != 0) {
 			if (choice == 9){ /* main menu */
@@ -49,7 +53,12 @@ public class Main {
 					if (choice == 1) { /* create a resource allocation */
 						System.out.println("Insira o ID do recurso a ser alocado: ");
 						int resourceId = 0;
+						int responsibleId = 0;
+						String dataEHora = null;
 						Resource resource = null;
+						AbleToAskResource responsible = null;
+						LocalDateTime startAllocation = null;
+						LocalDateTime finishAllocation = null;
 						try {
 							resourceId = kb.nextInt();
 						}
@@ -57,22 +66,75 @@ public class Main {
 							resourceId = -1;
 						}
 						if (resourceId < 0) {
-							System.out.println("ERRO! ID inválido. Insira um número natural.");
-							choice = 1;
+							System.out.println("ERRO! ID inválido. Refaça o procedimento e insira um número natural na próxima vez.");
 						}
 						else {
 							resource = Resource.findById(resourceId);
 							if (resource == null) {
-								choice = 1;
+								System.out.println("Certifique-se de que o ID informado está correto e refaça o procendimento.");
 							}
 							else {
-								
+								Resource.allocationsTotalCounter.increase();
+								Resource.inAllocationProccessCounter.increase();
+								resource.setStatus("Em processo de alocação");
+								System.out.println("Insira o ID do responsável: ");
+								try {
+									responsibleId = kb.nextInt();
+								}
+								catch (java.util.InputMismatchException e) {
+									responsibleId = -1;
+								}
+								if (responsibleId < 0) {
+									System.out.println("ERRO! ID inválido. Refaça o procedimento e insira um número natural na próxima vez.");
+								}
+								else {
+									responsible = AbleToAskResource.findById(resourceId);
+									if (responsible == null) {
+										System.out.println("Certifique-se de que o ID informado está correto e refaça o procendimento.");
+									}
+									else {
+										System.out.println("Insira a data e a hora de início da alocação no formato yyyy-MM-ddThh:mm");
+										dataEHora = kb.next();
+										try {
+											startAllocation = LocalDateTime.parse(dataEHora);
+										}
+										catch (java.time.format.DateTimeParseException e) {
+											startAllocation = null;
+										}
+										if (startAllocation == null) {
+											System.out.println("Formato incorreto de data e hora! Refaça o procedimento com o formato correto.");
+										}
+										else {
+											System.out.println("Insira a data e a hora do fim da alocação no formato yyyy-MM-ddThh:mm");
+											dataEHora = kb.next();
+											try {
+												finishAllocation = LocalDateTime.parse(dataEHora);
+											}
+											catch (java.time.format.DateTimeParseException e) {
+												finishAllocation = null;
+											}
+											if (finishAllocation == null) {
+												System.out.println("Formato incorreto de data e hora! Refaça o procedimento com o formato correto.");
+											}
+											else {
+												resource.allocate(responsible, startAllocation, finishAllocation);
+											}
+										}
+									}
+								}
 							}
 						}
 						
 					}
 					else if (choice == 2) { /* modify a resource allocation */
-						
+						System.out.println("Insira o ID do recurso a ser alocado: ");
+						int resourceId = 0;
+						int responsibleId = 0;
+						String dataEHora = null;
+						Resource resource = null;
+						AbleToAskResource responsible = null;
+						LocalDateTime startAllocation = null;
+						LocalDateTime finishAllocation = null;
 					}
 					else if (choice == 3) { /* delete a resource allocation */
 						
@@ -108,7 +170,7 @@ public class Main {
 					Main.printStudentMenu();
 					try {
 						choice = kb.nextInt();
-					} 
+					}
 					catch (java.util.InputMismatchException e){
 						System.out.println("ERRO! Insira um número inteiro.");
 						choice = 10;
