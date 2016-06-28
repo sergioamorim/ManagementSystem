@@ -13,7 +13,9 @@ public class Allocation {
 	private LocalDateTime startAllocation;
 	private LocalDateTime finishAllocation;
 	
-	public void allocate(AbleToAskResource responsible, LocalDateTime startAllocation, LocalDateTime finishAllocation) {
+	public Allocation(Resource resource, AbleToAskResource responsible, LocalDateTime startAllocation, LocalDateTime finishAllocation) {
+		
+		this.setResource(resource);
 		
 		this.setResponsible(responsible);
 		
@@ -23,7 +25,7 @@ public class Allocation {
 		
 		Allocation.inAllocationProccessCounter.decrease();
 		Allocation.allocatedCounter.increase();
-		this.setStatus("Alocado");
+		resource.setStatus("Alocado");
 	}
 	
 	public AbleToAskResource getResponsible() {
@@ -31,13 +33,6 @@ public class Allocation {
 	}
 	public void setResponsible(AbleToAskResource responsible) {
 		this.responsible = responsible;
-	}
-
-	public String getStatus() {
-		return status;
-	}
-	public void setStatus(String status) {
-		this.status = status;
 	}
 
 	public Activity getActivity() {
@@ -59,6 +54,14 @@ public class Allocation {
 	}
 	public void setFinishAllocation(LocalDateTime finishAllocation2) {
 		this.finishAllocation = finishAllocation2;
+	}
+
+	public Resource getResource() {
+		return resource;
+	}
+
+	public void setResource(Resource resource) {
+		this.resource = resource;
 	}
 	
 }

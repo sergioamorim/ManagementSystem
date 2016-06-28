@@ -59,6 +59,7 @@ public class Main {
 						AbleToAskResource responsible = null;
 						LocalDateTime startAllocation = null;
 						LocalDateTime finishAllocation = null;
+						Allocation allocation = null;
 						try {
 							resourceId = kb.nextInt();
 						}
@@ -74,8 +75,8 @@ public class Main {
 								System.out.println("Certifique-se de que o ID informado está correto e refaça o procendimento.");
 							}
 							else {
-								Resource.allocationsTotalCounter.increase();
-								Resource.inAllocationProccessCounter.increase();
+								Allocation.allocationsTotalCounter.increase();
+								Allocation.inAllocationProccessCounter.increase();
 								resource.setStatus("Em processo de alocação");
 								System.out.println("Insira o ID do responsável: ");
 								try {
@@ -117,7 +118,7 @@ public class Main {
 												System.out.println("Formato incorreto de data e hora! Refaça o procedimento com o formato correto.");
 											}
 											else {
-												resource.allocate(responsible, startAllocation, finishAllocation);
+												allocation = new Allocation(resource, responsible, startAllocation, finishAllocation);
 											}
 										}
 									}
@@ -194,11 +195,11 @@ public class Main {
 		Activity.laboratoriesCounter.printCount();
 		Activity.presentationsCounter.printCount();
 		Activity.traditionalClassesCounter.printCount();
-		Resource.allocatedCounter.printCount();
-		Resource.allocationsTotalCounter.printCount();
-		Resource.finishedCounter.printCount();
-		Resource.inAllocationProccessCounter.printCount();
-		Resource.inProgressCounter.printCount();
+		Allocation.allocatedCounter.printCount();
+		Allocation.allocationsTotalCounter.printCount();
+		Allocation.finishedCounter.printCount();
+		Allocation.inAllocationProccessCounter.printCount();
+		Allocation.inProgressCounter.printCount();
 		User.counter.printCount();
 	}
 	private static void printMainMenu(){

@@ -25,7 +25,7 @@ public class AbleToAskResource extends User {
 		Allocation.allocatedCounter.decrease();
 		Allocation.inProgressCounter.increase();
 		this.setAllocationInProgress(true);
-		allocation.setStatus("Em andamento");
+		allocation.getResource().setStatus("Em andamento");
 	}
 	public boolean isAllocationInProgress() {
 		return allocationInProgress;
