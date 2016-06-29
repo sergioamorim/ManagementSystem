@@ -49,8 +49,10 @@ public class Allocation {
 		allocations.remove(allocation);
 	}
 	
-	public Allocation(Resource resource, AbleToAskResource responsible, LocalDateTime startAllocation, LocalDateTime finishAllocation) {
+	public Allocation(int id, Resource resource, AbleToAskResource responsible, LocalDateTime startAllocation, LocalDateTime finishAllocation) {
 		Allocation.allocations.add(this);
+		
+		this.setId(id);
 		
 		this.setResource(resource);
 		
