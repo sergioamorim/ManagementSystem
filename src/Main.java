@@ -146,7 +146,7 @@ public class Main {
 		System.out.println("Insira o ID da alocação: ");
 		idAllocation = getNaturalNumberFromKeyboard();
 		allocation = Allocation.findById(idAllocation);
-		if (allocation != null){
+		if (allocation == null){
 			System.out.println("Certifique-se de que o ID informado está correto e refaça o procedimento.");
 		}
 		else {
