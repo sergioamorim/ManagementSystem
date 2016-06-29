@@ -56,7 +56,7 @@ public class Main {
 						Main.printActivitiesReport();
 					}
 					else if (choice == 4) { /* print allocation properties */
-						Main.printAAllocationProperties();
+						Main.printAllocationProperties();
 					}
 					else { /* invalid input */
 						System.out.println("Entrada inválida");
@@ -83,6 +83,18 @@ public class Main {
 		kb.close();
 	}
 	
+	private static void printAllocationProperties() {
+		int allocationId;
+		System.out.println("Informe o ID da alocação que deseja obter informações: ");
+		allocationId = getNaturalNumberFromKeyboard();
+		if (Allocation.findById(allocationId) == null) {
+			System.out.println("Certifique-se de que o ID informado está correto e refaça o procedimento.");
+		}
+		else {
+			System.out.println(Allocation.findById(allocationId).toString());
+		}
+	}
+
 	private static void deleteAllocation() {
 		int allocationId;
 		System.out.println("Informe o ID da alocação para excluir: ");
