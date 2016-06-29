@@ -26,6 +26,20 @@ public class Allocation {
 		return null;
 	}
 	
+	public static void deleteAllocation(Allocation allocation) {
+		Allocation.allocationsTotalCounter.decrease();
+		String resourceStatus = allocation.getResource().getStatus();
+		if (resourceStatus == "Em processo de alocação")
+			Allocation.inAllocationProccessCounter.decrease();
+		else if (resourceStatus == "Em andamento")
+			Allocation.inProgressCounter.decrease();
+		else if (resourceStatus == "Alocado")
+			Allocation.allocatedCounter.decrease();
+		else if (resourceStatus == "Concluído")
+			Allocation.finishedCounter.decrease();
+		allocations.remove(allocation);
+	}
+	
 	public Allocation(Resource resource, AbleToAskResource responsible, LocalDateTime startAllocation, LocalDateTime finishAllocation) {
 		Allocation.allocations.add(this);
 		
