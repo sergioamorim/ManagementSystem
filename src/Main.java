@@ -50,10 +50,13 @@ public class Main {
 						
 					}
 					else if (choice == 3) { /* delete a resource allocation */
-						
+						deleteAllocation();
 					}
 					else if (choice == 4) { /* print activities report */
 						Main.printActivitiesReport();
+					}
+					else if (choice == 4) { /* print allocation properties */
+						Main.printAAllocationProperties();
 					}
 					else { /* invalid input */
 						System.out.println("Entrada inválida");
@@ -80,7 +83,20 @@ public class Main {
 		kb.close();
 	}
 	
-	private static LocalDateTime getAValidDateTime(){
+	private static void deleteAllocation() {
+		int allocationId;
+		System.out.println("Informe o ID da alocação para excluir: ");
+		allocationId = getNaturalNumberFromKeyboard();
+		if (Allocation.findById(allocationId) == null) {
+			System.out.println("Certifique-se de que o ID informado está correto e refaça o procedimento.");
+		}
+		else {
+			Allocation.deleteAllocation(Allocation.findById(allocationId));
+			System.out.println("Alocação removida com sucesso.");
+		}
+	}
+	
+	private static LocalDateTime getAValidDateTime() {
 		Scanner kb = new Scanner(System.in);
 		String validDateTimeString = kb.next();
 		LocalDateTime validDateTime = null;
@@ -219,6 +235,7 @@ public class Main {
 		System.out.println("Insira 2 para editar uma alocação de recurso");
 		System.out.println("Insira 3 para remover uma alocação de recurso");
 		System.out.println("Insira 4 para exibir o relatório de atividades");
+		System.out.println("Insira 5 para exibir informações de uma alocação");
 		System.out.println("Insira 9 para voltar ao menu anterior");
 	}
 	private static void printStudentMenu(){
