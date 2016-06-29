@@ -2,22 +2,11 @@ import java.util.ArrayList;
 
 public class User {
 	public static Counter counter = new Counter("usuários");
-	private static ArrayList<User> users = new ArrayList<User>();
 	
 	public User (){
-		User.users.add(this);
 		User.counter.increase();
 	}
 	
-	public User findById(int id){
-		for (User user : User.users) {
-			if (user.getId() == id) {
-				return user;
-			}
-		}
-		System.out.println("Usuário não encontrado.");
-		return null;
-	}
 	
 	public String toString() {
 		return super.toString()+" ID: "+this.id+
