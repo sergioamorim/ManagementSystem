@@ -143,12 +143,10 @@ public class Main {
 		System.out.println("Insira o ID do recurso a ser alocado: ");
 		int resourceId = 0;
 		int responsibleId = 0;
-		String dataEHora = null;
 		Resource resource = null;
 		AbleToAskResource responsible = null;
 		LocalDateTime startAllocation = null;
 		LocalDateTime finishAllocation = null;
-		Allocation allocation = null;
 		resourceId = getNaturalNumberFromKeyboard();
 		resource = Resource.findById(resourceId);
 		if (resource == null) {
@@ -166,33 +164,11 @@ public class Main {
 			}
 			else {
 				System.out.println("Insira a data e a hora de início da alocação no formato yyyy-MM-ddThh:mm");
-				dataEHora = kb.next();
-				try {
-					startAllocation = LocalDateTime.parse(dataEHora);
-				}
-				catch (java.time.format.DateTimeParseException e) {
-					startAllocation = null;
-				}
-				if (startAllocation == null) {
-					System.out.println("Formato incorreto de data e hora! Refaça o procedimento com o formato correto.");
-				}
-				else {
-					System.out.println("Insira a data e a hora do fim da alocação no formato yyyy-MM-ddThh:mm");
-					dataEHora = kb.next();
-					try {
-						finishAllocation = LocalDateTime.parse(dataEHora);
-					}
-					catch (java.time.format.DateTimeParseException e) {
-						finishAllocation = null;
-					}
-					if (finishAllocation == null) {
-						System.out.println("Formato incorreto de data e hora! Refaça o procedimento com o formato correto.");
-					}
-					else {
-						allocation = new Allocation(resource, responsible, startAllocation, finishAllocation);
-						System.out.println("Alocação criada com sucesso!");
-					}
-				}
+				startAllocation = getAValidDateTime();
+				System.out.println("Insira a data e a hora do fim da alocação no formato yyyy-MM-ddThh:mm");
+				finishAllocation = getAValidDateTime();
+				new Allocation(resource, responsible, startAllocation, finishAllocation);
+				System.out.println("Alocação criada com sucesso!");
 			}
 		}
 		kb.close();
