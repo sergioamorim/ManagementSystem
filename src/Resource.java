@@ -10,6 +10,10 @@ public class Resource {
 		Resource.resources.add(this);
 	}
 	
+	public String toString(){
+		return super.toString()+" ID: "+this.id+" Status: "+this.status;
+	}
+	
 	public static Resource findById(int id) {
 		for (Resource resource : Resource.resources) {
 			if (resource.getId() == id) {

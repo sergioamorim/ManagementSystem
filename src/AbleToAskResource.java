@@ -6,6 +6,12 @@ public class AbleToAskResource extends User {
 	private ArrayList<Allocation> allocationsHistory = new ArrayList<Allocation>();
 	private ArrayList<Activity> activititesHistory = new ArrayList<Activity>();
 	
+	public String toString() {
+		return super.toString()+" Alocação em andamento: "+this.allocationInProgress+
+				" Histórico de Alocações: "+this.allocationsHistory.toString()+
+				" Histórico de Atividades: "+this.activititesHistory.toString();
+	}
+	
 	public AbleToAskResource() {
 		AbleToAskResource.ableToAskResourceList.add(this);
 	}

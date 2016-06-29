@@ -6,6 +6,11 @@ public class User {
 		User.counter.increase();
 	}
 	
+	public String toString() {
+		return super.toString()+" ID: "+this.id+
+				"Nome: "+this.name;
+	}
+	
 	private int id;
 	private String name;
 

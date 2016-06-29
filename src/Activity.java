@@ -12,6 +12,14 @@ public class Activity {
 	private ArrayList<User> participants;
 	private ArrayList<File> supportMaterial;
 	
+	public String toString(){
+		return super.toString()+" Título: "+this.title+
+				" Descrição: "+this.description+
+				" Tipo: "+this.type+
+				" Participantes: "+this.participants.toString()+
+				" Material de apoio: "+this.supportMaterial.toString();
+	}
+	
 	public String getType() {
 		return type;
 	}
