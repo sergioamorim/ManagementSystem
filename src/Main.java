@@ -80,6 +80,25 @@ public class Main {
 		kb.close();
 	}
 	
+	private static LocalDateTime getAValidDateTime(){
+		Scanner kb = new Scanner(System.in);
+		String validDateTimeString = kb.next();
+		LocalDateTime validDateTime = null;
+		while (validDateTime == null) {
+			try {
+				validDateTime = LocalDateTime.parse(validDateTimeString);
+			}
+			catch (java.time.format.DateTimeParseException e) {
+				validDateTime = null;
+			}
+			if (validDateTime == null) {
+				System.out.println("Formato incorreto de data e hora! Tente novamente com o formato yyyy-MM-ddThh:mm");
+			}
+		}
+		kb.close();
+		return validDateTime;
+	}
+	
 	private static void confirmAllocation(){
 		int idAllocation;
 		Allocation allocation;
