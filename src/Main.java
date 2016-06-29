@@ -25,7 +25,29 @@ public class Main {
 				}	
 				while (choice != 0 && choice != 9) {
 					if (choice == 1) { /* confirm an allocation */
-						
+						int idAllocation;
+						Allocation allocation;
+						System.out.println("Informe o ID da alocação para confirmar: ");
+						idAllocation = kb.nextInt();
+						allocation = Allocation.findById(idAllocation);
+						allocation.getResponsible().confirmAllocation(allocation);
+						System.out.println("Alocação confirmada.");
+					}
+					else if (choice == 2) { /* input activity information */
+						int idAllocation;
+						Allocation allocation;
+						String activityTitle;
+						String activityDescription;
+						System.out.println("Insira o ID da alocação: ");
+						idAllocation = kb.nextInt();
+						allocation = Allocation.findById(idAllocation);
+						System.out.println("Insira o título da atividade: ");
+						activityTitle = kb.next();
+						allocation.getActivity().setTitle(activityTitle);
+						System.out.println("Insira a descrição da atividade: ");
+						activityDescription = kb.next();
+						allocation.getActivity().setDescription(activityDescription);
+						System.out.println("Informações adicionadas com sucesso.");			
 					}
 					else { /* invalid input */
 						System.out.println("Entrada inválida");
@@ -51,81 +73,7 @@ public class Main {
 				}	
 				while (choice != 0 && choice != 9) {
 					if (choice == 1) { /* create a resource allocation */
-						System.out.println("Insira o ID do recurso a ser alocado: ");
-						int resourceId = 0;
-						int responsibleId = 0;
-						String dataEHora = null;
-						Resource resource = null;
-						AbleToAskResource responsible = null;
-						LocalDateTime startAllocation = null;
-						LocalDateTime finishAllocation = null;
-						Allocation allocation = null;
-						try {
-							resourceId = kb.nextInt();
-						}
-						catch (java.util.InputMismatchException e) {
-							resourceId = -1;
-						}
-						if (resourceId < 0) {
-							System.out.println("ERRO! ID inválido. Refaça o procedimento e insira um número natural na próxima vez.");
-						}
-						else {
-							resource = Resource.findById(resourceId);
-							if (resource == null) {
-								System.out.println("Certifique-se de que o ID informado está correto e refaça o procendimento.");
-							}
-							else {
-								Allocation.allocationsTotalCounter.increase();
-								Allocation.inAllocationProccessCounter.increase();
-								resource.setStatus("Em processo de alocação");
-								System.out.println("Insira o ID do responsável: ");
-								try {
-									responsibleId = kb.nextInt();
-								}
-								catch (java.util.InputMismatchException e) {
-									responsibleId = -1;
-								}
-								if (responsibleId < 0) {
-									System.out.println("ERRO! ID inválido. Refaça o procedimento e insira um número natural na próxima vez.");
-								}
-								else {
-									responsible = AbleToAskResource.findById(resourceId);
-									if (responsible == null) {
-										System.out.println("Certifique-se de que o ID informado está correto e refaça o procendimento.");
-									}
-									else {
-										System.out.println("Insira a data e a hora de início da alocação no formato yyyy-MM-ddThh:mm");
-										dataEHora = kb.next();
-										try {
-											startAllocation = LocalDateTime.parse(dataEHora);
-										}
-										catch (java.time.format.DateTimeParseException e) {
-											startAllocation = null;
-										}
-										if (startAllocation == null) {
-											System.out.println("Formato incorreto de data e hora! Refaça o procedimento com o formato correto.");
-										}
-										else {
-											System.out.println("Insira a data e a hora do fim da alocação no formato yyyy-MM-ddThh:mm");
-											dataEHora = kb.next();
-											try {
-												finishAllocation = LocalDateTime.parse(dataEHora);
-											}
-											catch (java.time.format.DateTimeParseException e) {
-												finishAllocation = null;
-											}
-											if (finishAllocation == null) {
-												System.out.println("Formato incorreto de data e hora! Refaça o procedimento com o formato correto.");
-											}
-											else {
-												allocation = new Allocation(resource, responsible, startAllocation, finishAllocation);
-											}
-										}
-									}
-								}
-							}
-						}
-						
+						createResourceAllocation();
 					}
 					else if (choice == 2) { /* modify a resource allocation */
 						System.out.println("Insira o ID do recurso a ser alocado: ");
@@ -136,6 +84,7 @@ public class Main {
 						AbleToAskResource responsible = null;
 						LocalDateTime startAllocation = null;
 						LocalDateTime finishAllocation = null;
+						
 					}
 					else if (choice == 3) { /* delete a resource allocation */
 						
@@ -191,6 +140,83 @@ public class Main {
 		}
 		kb.close();
 	}
+	
+	private static void createResourceAllocation(){
+		Scanner kb = new Scanner(System.in);
+		System.out.println("Insira o ID do recurso a ser alocado: ");
+		int resourceId = 0;
+		int responsibleId = 0;
+		String dataEHora = null;
+		Resource resource = null;
+		AbleToAskResource responsible = null;
+		LocalDateTime startAllocation = null;
+		LocalDateTime finishAllocation = null;
+		Allocation allocation = null;
+		resourceId = getNaturalNumberFromKeyboard();
+		resource = Resource.findById(resourceId);
+		if (resource == null) {
+			System.out.println("Certifique-se de que o ID informado está correto e refaça o procendimento.");
+		}
+		else {
+			Allocation.allocationsTotalCounter.increase();
+			Allocation.inAllocationProccessCounter.increase();
+			resource.setStatus("Em processo de alocação");
+			System.out.println("Insira o ID do responsável: ");
+			responsibleId = getNaturalNumberFromKeyboard();
+			responsible = AbleToAskResource.findById(resourceId);
+			if (responsible == null) {
+				System.out.println("Certifique-se de que o ID informado está correto e refaça o procendimento.");
+			}
+			else {
+				System.out.println("Insira a data e a hora de início da alocação no formato yyyy-MM-ddThh:mm");
+				dataEHora = kb.next();
+				try {
+					startAllocation = LocalDateTime.parse(dataEHora);
+				}
+				catch (java.time.format.DateTimeParseException e) {
+					startAllocation = null;
+				}
+				if (startAllocation == null) {
+					System.out.println("Formato incorreto de data e hora! Refaça o procedimento com o formato correto.");
+				}
+				else {
+					System.out.println("Insira a data e a hora do fim da alocação no formato yyyy-MM-ddThh:mm");
+					dataEHora = kb.next();
+					try {
+						finishAllocation = LocalDateTime.parse(dataEHora);
+					}
+					catch (java.time.format.DateTimeParseException e) {
+						finishAllocation = null;
+					}
+					if (finishAllocation == null) {
+						System.out.println("Formato incorreto de data e hora! Refaça o procedimento com o formato correto.");
+					}
+					else {
+						allocation = new Allocation(resource, responsible, startAllocation, finishAllocation);
+						System.out.println("Alocação criada com sucesso!");
+					}
+				}
+			}
+		}
+		kb.close();
+	}
+	
+	private static int getNaturalNumberFromKeyboard(){
+		Scanner kb = new Scanner(System.in);
+		int naturalNumber = -1;
+		while (naturalNumber < 0) {
+			try {
+				naturalNumber = kb.nextInt();
+			}
+			catch (java.util.InputMismatchException e) {
+				System.out.println("ERRO! Insira um número natural.");
+				naturalNumber = -1;
+			}
+		}		
+		kb.close();
+		return naturalNumber;
+	}
+	
 	private static void printActivitiesReport(){
 		Activity.laboratoriesCounter.printCount();
 		Activity.presentationsCounter.printCount();
@@ -211,6 +237,7 @@ public class Main {
 	private static void printProfessorsResearchersMenu(){
 		System.out.println("Insira 0 para sair");
 		System.out.println("Insira 1 para confirmar uma alocação");
+		System.out.println("Insira 2 para adicionar informações de atividade em uma alocação");
 		System.out.println("Insira 9 para voltar ao menu anterior");
 	}
 	private static void printAdministratorMenu(){
