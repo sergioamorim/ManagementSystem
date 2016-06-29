@@ -39,8 +39,7 @@ public class Main {
 						createResourceAllocation();
 					}
 					else if (choice == 2) { /* modify a resource allocation */
-						System.out.println("Insira o ID do recurso a ser alocado: ");
-						
+						modifyAllocation();						
 					}
 					else if (choice == 3) { /* delete a resource allocation */
 						deleteAllocation();
@@ -76,6 +75,49 @@ public class Main {
 		kb.close();
 	}
 	
+	private static void modifyAllocation() {
+		int allocationId;
+		Allocation allocation;
+		int resourceId = 0;
+		int responsibleId = 0;
+		LocalDateTime startAllocation = null;
+		LocalDateTime finishAllocation = null;
+		System.out.println("Insira o ID da alocação a ser modificada: ");
+		allocationId = getNaturalNumberFromKeyboard();
+		allocation = Allocation.findById(allocationId);
+		if (allocation == null) {
+			System.out.println("Certifique-se de que o ID informado está correto e refaça o procedimento.");
+		}
+		else {
+			System.out.println("Informe o novo ID ("+allocation.getId()+"é o atual): ");
+			allocationId = getNaturalNumberFromKeyboard();
+			allocation.setId(allocationId);
+			System.out.println("Informe o ID do novo recurso ("+allocation.getResource().getId()+"é o atual): ");
+			resourceId = getNaturalNumberFromKeyboard();
+			if (Resource.findById(resourceId) == null) {
+				System.out.println("Certifique-se de que ID informado está correto e tente novamente.");
+			}
+			else {
+				allocation.setResource(Resource.findById(resourceId));
+			}
+			System.out.println("Informe o ID do novo responsável ("+allocation.getResponsible().getId()+"é o atual): ");
+			responsibleId = getNaturalNumberFromKeyboard();
+			if (AbleToAskResource.findById(responsibleId) == null) {
+				System.out.println("Certifique-se de que o ID informado está correto e refaça o procendimento.");
+			}
+			else{
+				allocation.setResponsible(AbleToAskResource.findById(responsibleId));
+			}
+			System.out.println("Informe o novo horário de início ("+allocation.getStartAllocation().toString()+"é o atual): ");
+			startAllocation = getAValidDateTime();
+			allocation.setStartAllocation(startAllocation);
+			System.out.println("Informe o novo horário de finalização ("+allocation.getFinishAllocation().toString()+"é o atual): ");
+			finishAllocation = getAValidDateTime();
+			allocation.setFinishAllocation(finishAllocation);
+			System.out.println("Modificações realizadas com sucesso.");
+		}
+	}
+
 	private static void printAllocationProperties() {
 		int allocationId;
 		System.out.println("Informe o ID da alocação que deseja obter informações: ");
@@ -161,13 +203,16 @@ public class Main {
 	
 	private static void createResourceAllocation(){
 		Scanner kb = new Scanner(System.in);
-		System.out.println("Insira o ID do recurso a ser alocado: ");
+		int allocationId;
 		int resourceId = 0;
 		int responsibleId = 0;
 		Resource resource = null;
 		AbleToAskResource responsible = null;
 		LocalDateTime startAllocation = null;
 		LocalDateTime finishAllocation = null;
+		System.out.println("Insira um ID para a alocação: ");
+		allocationId = getNaturalNumberFromKeyboard();
+		System.out.println("Insira o ID do recurso a ser alocado: ");
 		resourceId = getNaturalNumberFromKeyboard();
 		resource = Resource.findById(resourceId);
 		if (resource == null) {
@@ -188,7 +233,7 @@ public class Main {
 				startAllocation = getAValidDateTime();
 				System.out.println("Insira a data e a hora do fim da alocação no formato yyyy-MM-ddThh:mm");
 				finishAllocation = getAValidDateTime();
-				new Allocation(resource, responsible, startAllocation, finishAllocation);
+				new Allocation(allocationId, resource, responsible, startAllocation, finishAllocation);
 				System.out.println("Alocação criada com sucesso!");
 			}
 		}
