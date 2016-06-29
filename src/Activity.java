@@ -6,9 +6,12 @@ public class Activity {
 	public static Counter presentationsCounter = new Counter("atividades de apresentações");
 	public static Counter laboratoriesCounter = new Counter("atividades de laboratório");
 	
-	String title;
-	String description;
-	String type;
+	private String title;
+	private String description;
+	private String type;
+	private ArrayList<User> participants;
+	private ArrayList<File> supportMaterial;
+	
 	public String getType() {
 		return type;
 	}
@@ -25,8 +28,7 @@ public class Activity {
 		}
 		this.type = type;
 	}
-	ArrayList<User> participants;
-	ArrayList<File> supportMaterial;
+	
 	public String getTitle() {
 		return title;
 	}
