@@ -25,29 +25,10 @@ public class Main {
 				}	
 				while (choice != 0 && choice != 9) {
 					if (choice == 1) { /* confirm an allocation */
-						int idAllocation;
-						Allocation allocation;
-						System.out.println("Informe o ID da alocação para confirmar: ");
-						idAllocation = kb.nextInt();
-						allocation = Allocation.findById(idAllocation);
-						allocation.getResponsible().confirmAllocation(allocation);
-						System.out.println("Alocação confirmada.");
+						confirmAllocation();
 					}
 					else if (choice == 2) { /* input activity information */
-						int idAllocation;
-						Allocation allocation;
-						String activityTitle;
-						String activityDescription;
-						System.out.println("Insira o ID da alocação: ");
-						idAllocation = kb.nextInt();
-						allocation = Allocation.findById(idAllocation);
-						System.out.println("Insira o título da atividade: ");
-						activityTitle = kb.next();
-						allocation.getActivity().setTitle(activityTitle);
-						System.out.println("Insira a descrição da atividade: ");
-						activityDescription = kb.next();
-						allocation.getActivity().setDescription(activityDescription);
-						System.out.println("Informações adicionadas com sucesso.");			
+						inputActivityInformation();
 					}
 					else { /* invalid input */
 						System.out.println("Entrada inválida");
@@ -141,6 +122,40 @@ public class Main {
 		kb.close();
 	}
 	
+	private static void createAllocation(){
+		int idAllocation;
+		Allocation allocation;
+		System.out.println("Informe o ID da alocação para confirmar: ");
+		idAllocation = getNaturalNumberFromKeyboard();
+		allocation = Allocation.findById(idAllocation);
+		if (allocation == null) {
+			System.out.println("Certifique-se de que o ID informado está correto e refaça o procedimento.");
+		}
+		else {
+			allocation.getResponsible().confirmAllocation(allocation);
+			System.out.println("Alocação confirmada.");
+		}
+	}
+	
+	private static void inputActivityInformation(){
+		Scanner kb = new Scanner(System.in);
+		int idAllocation;
+		Allocation allocation;
+		String activityTitle;
+		String activityDescription;
+		System.out.println("Insira o ID da alocação: ");
+		idAllocation = getNaturalNumberFromKeyboard();
+		allocation = Allocation.findById(idAllocation);
+		System.out.println("Insira o título da atividade: ");
+		activityTitle = kb.next();
+		allocation.getActivity().setTitle(activityTitle);
+		System.out.println("Insira a descrição da atividade: ");
+		activityDescription = kb.next();
+		allocation.getActivity().setDescription(activityDescription);
+		System.out.println("Informações adicionadas com sucesso.");
+		kb.close();
+	}
+	
 	private static void createResourceAllocation(){
 		Scanner kb = new Scanner(System.in);
 		System.out.println("Insira o ID do recurso a ser alocado: ");
@@ -163,7 +178,7 @@ public class Main {
 			resource.setStatus("Em processo de alocação");
 			System.out.println("Insira o ID do responsável: ");
 			responsibleId = getNaturalNumberFromKeyboard();
-			responsible = AbleToAskResource.findById(resourceId);
+			responsible = AbleToAskResource.findById(responsibleId);
 			if (responsible == null) {
 				System.out.println("Certifique-se de que o ID informado está correto e refaça o procendimento.");
 			}
