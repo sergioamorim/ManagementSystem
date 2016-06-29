@@ -17,12 +17,12 @@ public class Allocation {
 	private LocalDateTime finishAllocation;
 	
 	public String toString() {
-		return super.toString()+"\nID: "+this.id+
-				"\nRecurso: "+this.resource.toString()+
-				"\nResponsável: "+this.responsible.toString()+
-				"\nAtividade: "+this.activity.toString()+
-				"\nInício: "+this.startAllocation.toString()+
-				"\nFim: "+this.finishAllocation.toString();
+		return super.toString()+" ID: "+this.id+
+				" Recurso: "+this.resource.toString()+
+				" Responsável: "+this.responsible.toString()+
+				" Atividade: "+this.activity.toString()+
+				" Início: "+this.startAllocation.toString()+
+				" Fim: "+this.finishAllocation.toString();
 	}
 	
 	public static Allocation findById(int id) {
