@@ -1,4 +1,5 @@
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 
 public class Allocation {
 	public static Counter inAllocationProccessCounter = new Counter("recursos em processo de alocação");
@@ -6,14 +7,27 @@ public class Allocation {
 	public static Counter allocatedCounter = new Counter("recursos alocados");
 	public static Counter finishedCounter = new Counter("alocações concluídas");
 	public static Counter allocationsTotalCounter = new Counter("alocações no total");
+	private static ArrayList<Allocation> allocations = new ArrayList<Allocation>();
 	
+	private int id;
 	private Resource resource;
 	private AbleToAskResource responsible;
 	private Activity activity;
 	private LocalDateTime startAllocation;
 	private LocalDateTime finishAllocation;
 	
+	public static Allocation findById(int id) {
+		for (Allocation allocation : Allocation.allocations) {
+			if (allocation.getId() == id) {
+				return allocation;
+			}
+		}
+		System.out.println("Alocação não encontrada.");
+		return null;
+	}
+	
 	public Allocation(Resource resource, AbleToAskResource responsible, LocalDateTime startAllocation, LocalDateTime finishAllocation) {
+		Allocation.allocations.add(this);
 		
 		this.setResource(resource);
 		
@@ -62,6 +76,14 @@ public class Allocation {
 
 	public void setResource(Resource resource) {
 		this.resource = resource;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 	
 }
