@@ -122,7 +122,7 @@ public class Main {
 		kb.close();
 	}
 	
-	private static void createAllocation(){
+	private static void confirmAllocation(){
 		int idAllocation;
 		Allocation allocation;
 		System.out.println("Informe o ID da alocação para confirmar: ");
@@ -146,14 +146,19 @@ public class Main {
 		System.out.println("Insira o ID da alocação: ");
 		idAllocation = getNaturalNumberFromKeyboard();
 		allocation = Allocation.findById(idAllocation);
-		System.out.println("Insira o título da atividade: ");
-		activityTitle = kb.next();
-		allocation.getActivity().setTitle(activityTitle);
-		System.out.println("Insira a descrição da atividade: ");
-		activityDescription = kb.next();
-		allocation.getActivity().setDescription(activityDescription);
-		System.out.println("Informações adicionadas com sucesso.");
-		kb.close();
+		if (allocation != null){
+			System.out.println("Certifique-se de que o ID informado está correto e refaça o procedimento.");
+		}
+		else {
+			System.out.println("Insira o título da atividade: ");
+			activityTitle = kb.next();
+			allocation.getActivity().setTitle(activityTitle);
+			System.out.println("Insira a descrição da atividade: ");
+			activityDescription = kb.next();
+			allocation.getActivity().setDescription(activityDescription);
+			System.out.println("Informações adicionadas com sucesso.");
+			kb.close();
+		}
 	}
 	
 	private static void createResourceAllocation(){
