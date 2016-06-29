@@ -16,6 +16,15 @@ public class Allocation {
 	private LocalDateTime startAllocation;
 	private LocalDateTime finishAllocation;
 	
+	public String toString() {
+		return super.toString()+"\nID: "+this.id+
+				"\nRecurso: "+this.resource.toString()+
+				"\nResponsável: "+this.responsible.toString()+
+				"\nAtividade: "+this.activity.toString()+
+				"\nInício: "+this.startAllocation.toString()+
+				"\nFim: "+this.finishAllocation.toString();
+	}
+	
 	public static Allocation findById(int id) {
 		for (Allocation allocation : Allocation.allocations) {
 			if (allocation.getId() == id) {
