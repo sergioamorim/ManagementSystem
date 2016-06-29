@@ -16,13 +16,7 @@ public class Main {
 			}
 			else if (choice == 2) { /* menu for professors and researchers */
 				Main.printProfessorsResearchersMenu();
-				try {
-					choice = kb.nextInt();
-				} 
-				catch (java.util.InputMismatchException e){
-					System.out.println("ERRO! Insira um número inteiro.");
-					choice = 10;
-				}	
+				choice = getNaturalNumberFromKeyboard();
 				while (choice != 0 && choice != 9) {
 					if (choice == 1) { /* confirm an allocation */
 						confirmAllocation();
@@ -34,24 +28,12 @@ public class Main {
 						System.out.println("Entrada inválida");
 					}
 					Main.printProfessorsResearchersMenu();
-					try {
-						choice = kb.nextInt();
-					} 
-					catch (java.util.InputMismatchException e){
-						System.out.println("ERRO! Insira um número inteiro.");
-						choice = 10;
-					}	
+					choice = getNaturalNumberFromKeyboard();
 				}
 			}
 			else if (choice == 3) { /* menu for administrators*/
 				Main.printAdministratorMenu();
-				try {
-					choice = kb.nextInt();
-				} 
-				catch (java.util.InputMismatchException e){
-					System.out.println("ERRO! Insira um número inteiro.");
-					choice = 10;
-				}	
+				choice = getNaturalNumberFromKeyboard();
 				while (choice != 0 && choice != 9) {
 					if (choice == 1) { /* create a resource allocation */
 						createResourceAllocation();
@@ -77,47 +59,23 @@ public class Main {
 						System.out.println("Entrada inválida");
 					}
 					Main.printAdministratorMenu();
-					try {
-						choice = kb.nextInt();
-					} 
-					catch (java.util.InputMismatchException e){
-						System.out.println("ERRO! Insira um número inteiro.");
-						choice = 10;
-					}	
+					choice = getNaturalNumberFromKeyboard();
 				}
 			}
 			else if (choice == 1){ /* menu for students */
 				Main.printStudentMenu();
-				try {
-					choice = kb.nextInt();
-				} 
-				catch (java.util.InputMismatchException e){
-					System.out.println("ERRO! Insira um número inteiro.");
-					choice = 10;
-				}	
+				choice = getNaturalNumberFromKeyboard();
 				while (choice != 0 && choice != 9) {
 					/* there is no valid option for students yet */
 					System.out.println("Entrada inválida"); /* invalid input */
 					Main.printStudentMenu();
-					try {
-						choice = kb.nextInt();
-					}
-					catch (java.util.InputMismatchException e){
-						System.out.println("ERRO! Insira um número inteiro.");
-						choice = 10;
-					}	
+					choice = getNaturalNumberFromKeyboard();
 				}
 			}
 			else { /* invalid input */
 				System.out.println("Entrada inválida");
 			}
-			try {
-				choice = kb.nextInt();
-			} 
-			catch (java.util.InputMismatchException e){
-				System.out.println("ERRO! Insira um número inteiro.");
-				choice = 10;
-			}	
+			choice = getNaturalNumberFromKeyboard();
 		}
 		kb.close();
 	}
