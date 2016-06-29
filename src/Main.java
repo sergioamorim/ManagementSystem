@@ -40,13 +40,6 @@ public class Main {
 					}
 					else if (choice == 2) { /* modify a resource allocation */
 						System.out.println("Insira o ID do recurso a ser alocado: ");
-						int resourceId = 0;
-						int responsibleId = 0;
-						String dataEHora = null;
-						Resource resource = null;
-						AbleToAskResource responsible = null;
-						LocalDateTime startAllocation = null;
-						LocalDateTime finishAllocation = null;
 						
 					}
 					else if (choice == 3) { /* delete a resource allocation */
