@@ -1,7 +1,7 @@
 
 public class Classroom extends Resource {
-	public Classroom(int id, String status) {
-		super(id, status);
+	public Classroom(int id) {
+		super(id);
 	}
 	Professor responsible;
 }

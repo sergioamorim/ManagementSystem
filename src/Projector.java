@@ -1,6 +1,6 @@
 
 public class Projector extends Resource {
-	public Projector(int id, String status) {
-		super(id, status);
+	public Projector(int id) {
+		super(id);
 	}
 }

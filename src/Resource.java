@@ -6,9 +6,8 @@ public class Resource {
 	private int id;
 	private String status;
 	
-	public Resource(int id, String status) {
+	public Resource(int id) {
 		this.setId(id);
-		this.setStatus(status);
 		Resource.resources.add(this);
 	}
 	
