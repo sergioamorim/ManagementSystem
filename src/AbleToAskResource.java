@@ -12,10 +12,8 @@ public class AbleToAskResource extends User {
 				" Histórico de Atividades: "+this.activititesHistory.toString();
 	}
 	
-	public AbleToAskResource(int id, String name, boolean allocationInProgress) {
-		super.setId(id);
-		super.setName(name);
-		this.setAllocationInProgress(allocationInProgress);
+	public AbleToAskResource(int id, String name, String email) {
+		super(id, name, email);
 		this.setAllocationsHistory(new ArrayList<Allocation>());
 		this.setActivititesHistory(new ArrayList<Activity>());
 		AbleToAskResource.ableToAskResourceList.add(this);

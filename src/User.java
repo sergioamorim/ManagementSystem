@@ -1,9 +1,7 @@
-import java.util.ArrayList;
-
 public class User {
 	public static Counter counter = new Counter("usuários");
 	
-	public User (){
+	public User (int id, String name, String email){
 		User.counter.increase();
 	}
 	
@@ -15,6 +13,7 @@ public class User {
 	
 	private int id;
 	private String name;
+	private String email;
 
 	public int getId() {
 		return id;
@@ -30,6 +29,14 @@ public class User {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+	
+	public String getEmail() {
+		return this.email;
+	}
+	
+	public void setEmail(String email) {
+		this.email = email;
 	}
 	
 }
