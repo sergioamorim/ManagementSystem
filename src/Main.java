@@ -7,8 +7,12 @@ public class Main {
 		int choice = 9;
 		Scanner kb = new Scanner(System.in);
 		
-		Resource ex = new Resource();
-		ex.setId(1);
+		new Resource(1, null);
+		new Resource(2, null);
+		new Professor(1, "Baldoino", "baldoino@ic.ufal.br");
+		new Professor(2, "Rodrigo", "rodrigo@ic.ufal.br");
+		new Researcher(3, "Márcio", "marcio@ic.ufal.br");
+		new Student(4, "Sergio", "sata@ic.ufal.br");
 		
 		while (choice != 0) {
 			if (choice == 9){ /* main menu */
