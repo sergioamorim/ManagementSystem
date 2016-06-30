@@ -7,12 +7,16 @@ public class Main {
 		int choice = 9;
 		Scanner kb = new Scanner(System.in);
 		
-		new Resource(1, null);
-		new Resource(2, null);
+		new Auditorium(1);
+		new Classroom(3);
+		new Projector(4);
+		new Laboratory(7);
 		new Professor(1, "Baldoino", "baldoino@ic.ufal.br");
 		new Professor(2, "Rodrigo", "rodrigo@ic.ufal.br");
 		new Researcher(3, "Márcio", "marcio@ic.ufal.br");
-		new Student(4, "Sergio", "sata@ic.ufal.br");
+		new MasterDegree(4, "Henrique", "hfa@ic.ufal.br");
+		new MasterDegree(5, "Marcus", "macpj@ic.ufal.br");
+		new GraduationDegree(6, "Sergio", "sata@ic.ufal.br");
 		
 		while (choice != 0) {
 			if (choice == 9){ /* main menu */
